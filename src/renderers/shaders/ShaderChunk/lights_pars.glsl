@@ -12,15 +12,11 @@
 
 	uniform DirectionalLight directionalLights[ NUM_DIR_LIGHTS ];
 
-	IncidentLight getDirectionalDirectLight( const in DirectionalLight directionalLight, const in GeometricContext geometry ) {
-
-		IncidentLight directLight;
+	void getDirectionalDirectLight( const in DirectionalLight directionalLight, const in GeometricContext geometry, out IncidentLight directLight ) {
 
 		directLight.color = directionalLight.color;
 		directLight.direction = directionalLight.direction;
 		directLight.visible = true;
-
-		return directLight;
 
 	}
 
@@ -43,9 +39,7 @@
 
 	uniform PointLight pointLights[ NUM_POINT_LIGHTS ];
 
-	IncidentLight getPointDirectLight( const in PointLight pointLight, const in GeometricContext geometry ) {
-
-		IncidentLight directLight;
+	void getPointDirectLight( const in PointLight pointLight, const in GeometricContext geometry, out IncidentLight directLight ) {
 
 		vec3 lVector = pointLight.position - geometry.position;
 		directLight.direction = normalize( lVector );
@@ -65,7 +59,6 @@
 
 		}
 
-		return directLight;
 
 	}
 
@@ -91,9 +84,8 @@
 
 	uniform SpotLight spotLights[ NUM_SPOT_LIGHTS ];
 
-	IncidentLight getSpotDirectLight( const in SpotLight spotLight, const in GeometricContext geometry ) {
+	void getSpotDirectLight( const in SpotLight spotLight, const in GeometricContext geometry, out IncidentLight directLight ) {
 
-		IncidentLight directLight;
 
 		vec3 lVector = spotLight.position - geometry.position;
 		directLight.direction = normalize( lVector );
@@ -116,8 +108,6 @@
 			directLight.visible = false;
 
 		}
-
-		return directLight;
 
 	}
 

@@ -29,7 +29,7 @@ IncidentLight directLight;
 
 		pointLight = pointLights[ i ];
 
-		directLight = getPointDirectLight( pointLight, geometry );
+		getPointDirectLight( pointLight, geometry, directLight );
 
 		#ifdef USE_SHADOWMAP
 		directLight.color *= all( bvec2( pointLight.shadow, directLight.visible ) ) ? getPointShadow( pointShadowMap[ i ], pointLight.shadowMapSize, pointLight.shadowBias, pointLight.shadowRadius, vPointShadowCoord[ i ] ) : 1.0;
@@ -49,7 +49,7 @@ IncidentLight directLight;
 
 		spotLight = spotLights[ i ];
 
-		directLight = getSpotDirectLight( spotLight, geometry );
+		getSpotDirectLight( spotLight, geometry, directLight );
 
 		#ifdef USE_SHADOWMAP
 		directLight.color *= all( bvec2( spotLight.shadow, directLight.visible ) ) ? getShadow( spotShadowMap[ i ], spotLight.shadowMapSize, spotLight.shadowBias, spotLight.shadowRadius, vSpotShadowCoord[ i ] ) : 1.0;
@@ -69,7 +69,7 @@ IncidentLight directLight;
 
 		directionalLight = directionalLights[ i ];
 
-		directLight = getDirectionalDirectLight( directionalLight, geometry );
+		getDirectionalDirectLight( directionalLight, geometry, directLight );
 
 		#ifdef USE_SHADOWMAP
 		directLight.color *= all( bvec2( directionalLight.shadow, directLight.visible ) ) ? getShadow( directionalShadowMap[ i ], directionalLight.shadowMapSize, directionalLight.shadowBias, directionalLight.shadowRadius, vDirectionalShadowCoord[ i ] ) : 1.0;
